@@ -11,7 +11,7 @@ A Python-based Expense Tracker application that helps users record, manage, and 
 -  Delete expenses using unique ID
 -  Monthly expense summary
 -  Visualize daily spending trends using graphs
--  
+  
 ---
 
 ##  Technologies Used
@@ -23,6 +23,18 @@ A Python-based Expense Tracker application that helps users record, manage, and 
 - MySQL Connector (Python integration)
 
 ---
+## Core Concepts Demonstrated
+
+- CRUD Operations (Create, Read, Delete logic)  
+- Database Integration using MySQL  
+- CLI (Command Line Interface) Application Design  
+- SQL Query Handling (INSERT, SELECT, DELETE, WHERE conditions)  
+- Data Aggregation and Monthly Analysis  
+- Structured user input handling  
+- Data Visualization using graphs  
+
+---
+
 
 ## Project Structure
 

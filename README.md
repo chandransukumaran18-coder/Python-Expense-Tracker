@@ -33,5 +33,5 @@ ExpenseTracker/
 
 ---
 <img width="1919" height="1005" alt="Screenshot 2026-04-29 045630" src="https://github.com/user-attachments/assets/161a5e8b-3d30-4e64-875f-aa022e0f5dfb" />
-<img width="1492" height="773" alt="Screenshot 2026-04-29 045718" src="https://github.com/user-attachments/assets/8ae5b72e-220b-43df-9bef-5244582ce36c" />
 <img width="1919" height="977" alt="Screenshot 2026-04-29 045659" src="https://github.com/user-attachments/assets/732405ac-35f3-433a-9c6c-dbb9123be814" />
+<img width="1492" height="773" alt="Screenshot 2026-04-29 045718" src="https://github.com/user-attachments/assets/8ae5b72e-220b-43df-9bef-5244582ce36c" />

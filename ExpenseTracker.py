@@ -1,0 +1,111 @@
+import mysql.connector as sql
+import matplotlib.pyplot as plt
+import numpy as np
+print('-'*100)
+print("Welcome to Expense Tracker")
+print('-'*100)
+print("1.Add Expense")
+print("2.View Expense")
+print("3.Search Expense")
+print("4.Delete Expense")
+print("5.Monthly Summary")
+print("6.Show Net expense in the form of a graph for specific month")
+print("7.Exit")
+con=sql.connect(host="127.0.0.1",
+    user="python_user",
+    password="groot",
+    database="suku",
+    auth_plugin="mysql_native_password")
+cur=con.cursor()
+while True:
+    choice=int(input("Enter your choice in numbers:"))
+    if choice==1:
+        s=int(input("Enter unique serial number:"))
+        price=float(input("Enter the cost of your spending:"))
+        cat=input("Enter the category in which your spending fall under. eg.food/transport:")
+        desc=input("Enter the description:")
+        date=input("Enter the date in this format 'YYYY-MM-DD':")
+        query="insert into ExpenseTracker values({},{},'{}','{}','{}')".format(s,price,cat,desc,date)
+        cur.execute(query)
+        con.commit()
+        print('Expense added')
+    elif choice==2:
+        query='select *from ExpenseTracker;'
+        cur.execute(query)
+        y=cur.fetchall()
+        for i in y:
+            print(i)
+    elif choice==3:
+        year=int(input('Enter the year in number in which you spent money:'))
+        month=int(input('Enter the month in number in which you spent money to view:'))
+        query = "SELECT * FROM ExpenseTracker WHERE date LIKE '{}-{:02d}-%'".format(year, month)
+        cur.execute(query)
+        y=cur.fetchall()
+        for i in y:
+            print(i)
+    elif choice==4:
+        sno=int(input("enter unique serial number whose record you want to delete from the table:"))
+        query='delete from ExpenseTracker where s_no={}'.format(sno)
+        cur.execute(query)
+        con.commit()
+    elif choice==5:
+        m=['January','February','March','April','May','June','July','August','September','October','November','December']
+        n=[1,2,3,4,5,6,7,8,9,10,11,12]
+        month=input("enter the month in which you want to see your spendings:")
+        for i in range(len(m)):
+            if m[i]==month.title():
+                print("The spendings in the month of {}".format(month))
+                query="select *from ExpenseTracker where date like '%-{:02d}-%'".format(n[i])
+                cur.execute(query)
+                y=cur.fetchall()
+                for i in y:
+                    print(i)
+    elif choice==6:
+        import calendar
+        m=['January','February','March','April','May','June','July','August','September','October','November','December']
+        n=[1,2,3,4,5,6,7,8,9,10,11,12]
+        month=input("Enter the month in which you want to see your spendings: ")
+        year=int(input("Enter the year: "))
+        for i in range(len(m)):
+            if m[i] == month.title():
+                daily_expense = {}
+                query = "SELECT * FROM ExpenseTracker WHERE date LIKE '{}-{:02d}-%'".format(year, n[i])
+                cur.execute(query)
+                records = cur.fetchall()
+                for row in records:
+                    day = row[4].day
+                    amount = row[1]
+                    if day in daily_expense:
+                        daily_expense[day] += amount
+                    else:
+                        daily_expense[day] = amount
+                total_days = calendar.monthrange(year, n[i])[1]
+                x = list(range(1, total_days + 1))
+                y = []
+                for day in x:
+                    if day in daily_expense:
+                        y.append(daily_expense[day])
+                    else:
+                        y.append(0)
+                plt.figure(figsize=(10,5))
+                plt.plot(x, y, marker='o', linestyle='-',color='yellow')
+                plt.grid(True)
+                plt.xlabel("Days")
+                plt.ylabel("Total Spending")
+                plt.title("Spendings in {}".format(month.title()))
+                plt.xticks(x)
+                plt.show()
+    elif choice==7:
+        break
+                    
+        
+
+    
+        
+
+
+        
+
+
+
+
